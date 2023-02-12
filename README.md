@@ -5,7 +5,7 @@
 
 - [Puedes acceder a toda la documentación del framework acá](https://laravel.com/docs/9.x).
 
-### Instalation
+### Instalación
 
 * Clonar proyecto
 

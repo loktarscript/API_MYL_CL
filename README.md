@@ -7,7 +7,7 @@
 
 ### Instalation
 
-* Clone proyect
+* Clonar proyecto
 
 ```sh
 $ git@github.com:loktarscript/API_MYL_CL.git

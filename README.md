@@ -21,7 +21,7 @@ $ composer install
 $ npm install
 ```
 
-### Configuration
+### Configuración
 
 * Crear archivo .env
 ```sh
@@ -51,6 +51,6 @@ php artisan jwt:secret
 ```
 
 
-## License Laravel
+## Licencia Laravel
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

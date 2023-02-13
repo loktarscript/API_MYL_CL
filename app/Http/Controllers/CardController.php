@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\card as Card;
+use App\Models\Editions;
 use Illuminate\Http\Request;
 use Http;
 
@@ -10,12 +11,15 @@ class CardController extends Controller
 {
     public function getCardList(Request $request){
         // return env('BASE_URL') . '/cards/edition/undefined';
-        $response = Http::withOptions(['verify' => false])->post(env('BASE_URL') . '/cards/edition/undefined');
+        // $response = Http::withOptions(['verify' => false])->post(env('BASE_URL') . '/cards/edition/undefined');
+        $response = Http::withOptions(['verify' => false])->post(env('BASE_URL') . '/cards/edition/todas');
         return $response;
     }
     
+    // Registro de cartas, este método hará sync una vez a la semana.
     public function syncCardsDb(Request $request){
         $listCards = $this->getCardList($request);
+        // return $listCards;
         foreach ($listCards['cards'] as $key => $card) {
             # code...
             if(!Card::where('id_myl_api', $card['id'])->exists()){
@@ -30,11 +34,27 @@ class CardController extends Controller
                     'cost' => $card['cost'],
                     'damage' => $card['damage'],
                     'ability' => $card['ability'],
-                    'slug_edition' => $card['ed_slug']
+                    // 'slug_edition' => $this->syncEditions($card['ed_slug']),
+                    'fk_edition' => $this->syncEditions($card['ed_slug']),
                 ]);
             }
         }
         return Card::get();
+    }
+
+    // Esto se ejecuta una vez actualizado el registro de cartas
+    function syncEditions($card_slug){
+        // $uniqueValues = Card::select('slug_edition')->distinct()->get();
+        if(!Editions::where('slug', $card_slug)->exists()){
+            $edition = Editions::create([
+                'name' => $card_slug,
+                'slug' => $card_slug,
+            ]);
+            return $edition->id;
+        }else{
+            $edition = Editions::where('slug', $card_slug)->first();
+            return $edition->id;
+        }
     }
     // https://api.myl.cl/static/cards/' + $scope.edition.id + '/' + $scope.details.edid + '.png'
     // https://api.myl.cl

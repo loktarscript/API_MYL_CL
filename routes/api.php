@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('get-cards', [CardController::class, 'getCardList']);
 Route::post('sync-db-cards', [CardController::class, 'syncCardsDb']);
+Route::post('sync-editions', [CardController::class, 'syncEditions']);

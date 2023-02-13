@@ -20,6 +20,7 @@ class card extends Model
         'cost',
         'damage',
         'ability',
-        'slug_edition'
+        'slug_edition',
+        'fk_edition'
     ];
 }

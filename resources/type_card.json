@@ -1,5 +1,10 @@
 {"types": [
     {
+        "id": "0",
+        "slug": "unknow",
+        "name": "Unknow"
+    },
+    {
         "id": "1",
         "slug": "aliado",
         "name": "Aliado"

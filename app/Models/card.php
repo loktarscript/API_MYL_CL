@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Editions;
 
 class card extends Model
 {
@@ -23,4 +24,9 @@ class card extends Model
         'slug_edition',
         'fk_edition'
     ];
+
+    public function edition()
+	{
+		return $this->belongsTo(Editions::class, 'fk_edition');
+	}
 }

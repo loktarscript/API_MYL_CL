@@ -9,7 +9,7 @@ use Http;
 
 class CardController extends Controller
 {
-    public function getCardList(Request $request){
+    public function getCardAPIList(Request $request){
         // return env('BASE_URL') . '/cards/edition/undefined';
         // $response = Http::withOptions(['verify' => false])->post(env('BASE_URL') . '/cards/edition/undefined');
         $response = Http::withOptions(['verify' => false])->post(env('BASE_URL') . '/cards/edition/todas');
@@ -18,7 +18,7 @@ class CardController extends Controller
     
     // Registro de cartas, este método hará sync una vez a la semana.
     public function syncCardsDb(Request $request){
-        $listCards = $this->getCardList($request);
+        $listCards = $this->getCardAPIList($request);
         // return $listCards;
         foreach ($listCards['cards'] as $key => $card) {
             # code...
@@ -43,7 +43,7 @@ class CardController extends Controller
     }
 
     // Esto se ejecuta una vez actualizado el registro de cartas
-    function syncEditions($card_slug){
+    protected function syncEditions($card_slug){
         // $uniqueValues = Card::select('slug_edition')->distinct()->get();
         if(!Editions::where('slug', $card_slug)->exists()){
             $edition = Editions::create([
@@ -55,6 +55,10 @@ class CardController extends Controller
             $edition = Editions::where('slug', $card_slug)->first();
             return $edition->id;
         }
+    }
+
+    public function getCards(){
+        return Card::get();
     }
     // https://api.myl.cl/static/cards/' + $scope.edition.id + '/' + $scope.details.edid + '.png'
     // https://api.myl.cl

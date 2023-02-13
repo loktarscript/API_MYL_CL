@@ -53,8 +53,8 @@ php artisan jwt:secret
 ## Rutas
 | Ruta         | Tipo  | # Descripcion |
 |--------------|:-----:|-----------:|
-| /api/get-cards|  POST |        Retorna lista de cartas api oficial myl |
-| /api/sync-db-cards    |  POST |          Inserta a la bd local las cartas |
+| /api/sync-db-cards    |  POST |          Inserta a la bd local las cartas y ediciones |
+| api/get-cards         | GET   | Muestra listado de cartas almacenadas en db local     |
 
 ## Licencia Laravel
 

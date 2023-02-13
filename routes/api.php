@@ -18,6 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('get-cards', [CardController::class, 'getCardList']);
+Route::post('get-cards', [CardController::class, 'getCardAPIList']);
+Route::get('get-cards', [CardController::class, 'getCards']);
 Route::post('sync-db-cards', [CardController::class, 'syncCardsDb']);
 Route::post('sync-editions', [CardController::class, 'syncEditions']);
